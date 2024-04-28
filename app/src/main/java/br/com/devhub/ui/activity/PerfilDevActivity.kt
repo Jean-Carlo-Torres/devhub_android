@@ -4,10 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -18,6 +22,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -47,32 +53,60 @@ class PerfilDevActivity : ComponentActivity() {
 fun exibePerfilDev(usuario: Usuario) {
     Column(
         modifier = Modifier
-            .padding(16.dp)
             .fillMaxSize(),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Image(
-            painter = painterResource(usuario.fotoPerfil),
-            contentDescription = null,
-            Modifier
-                .size(200.dp)
-                .clip(shape = CircleShape),
-            contentScale = ContentScale.Crop
-        )
-        Text(
-            text = usuario.nome,
-            style = MaterialTheme.typography.titleLarge,
-            modifier = Modifier.offset(y = 8.dp)
-                .padding(16.dp)
-        )
-        Text(
-            text = usuario.usuarioGithub,
-            style = MaterialTheme.typography.titleMedium
-        )
-        Text(
-            text = usuario.bio,
-        )
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            Box(
+                modifier = Modifier
+                    .height(150.dp)
+                    .fillMaxWidth()
+                    .background(
+                        brush = Brush.verticalGradient(
+                            colors = listOf( Color.Black, Color.Blue),
+                            startY = 0f,
+                            endY = 700f
+                        ))
+            )
+            Column(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Image(
+                    painter = painterResource(usuario.fotoPerfil),
+                    contentDescription = null,
+                    Modifier
+                        .size(200.dp)
+                        .clip(shape = CircleShape)
+                        .border(
+                            width = 2.dp,
+                            color = Color.White,
+                            shape = CircleShape
+                        ),
+                    contentScale = ContentScale.Crop
+                )
+                Text(
+                    text = usuario.nome,
+                    style = MaterialTheme.typography.titleLarge,
+                    modifier = Modifier.padding(vertical = 8.dp)
+                )
+                Text(
+                    text = usuario.usuarioGithub,
+                    style = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier.padding(bottom = 8.dp)
+                )
+                Text(
+                    text = usuario.bio,
+                )
+            }
+        }
     }
 }
 
