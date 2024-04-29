@@ -2,8 +2,8 @@ package br.com.devhub.ui.model
 
 import androidx.annotation.DrawableRes
 
-class Usuario (
-    @DrawableRes val fotoPerfil: Int,
+class Usuario(
+    val fotoPerfil: String? = null,
     val nome: String,
     val usuarioGithub: String,
     val bio: String

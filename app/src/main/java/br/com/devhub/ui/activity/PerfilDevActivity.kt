@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import br.com.devhub.R
 import br.com.devhub.ui.activity.ui.theme.DevHubTheme
 import br.com.devhub.ui.model.Usuario
+import coil.compose.AsyncImage
 
 class PerfilDevActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,8 +80,8 @@ fun exibePerfilDev(usuario: Usuario) {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Image(
-                    painter = painterResource(usuario.fotoPerfil),
+                AsyncImage(
+                    model = "https://avatars.githubusercontent.com/u/138898021?v=4",
                     contentDescription = null,
                     Modifier
                         .size(200.dp)
@@ -90,7 +91,8 @@ fun exibePerfilDev(usuario: Usuario) {
                             color = Color.White,
                             shape = CircleShape
                         ),
-                    contentScale = ContentScale.Crop
+                    contentScale = ContentScale.Crop,
+                    placeholder = painterResource(id = R.drawable.placeholder)
                 )
                 Text(
                     text = usuario.nome,
@@ -120,7 +122,6 @@ fun exibePerfilDevPreview() {
 }
 
 fun usuario() = Usuario(
-    fotoPerfil = R.drawable.ic_launcher_background,
     nome = "Jean Carlo",
     usuarioGithub = "Jean-Carlo-Torres",
     bio = "biografia"
