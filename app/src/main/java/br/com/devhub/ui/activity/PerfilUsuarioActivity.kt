@@ -1,9 +1,9 @@
 package br.com.devhub.ui.activity
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -28,14 +28,22 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.lifecycleScope
 import br.com.devhub.R
 import br.com.devhub.ui.activity.ui.theme.DevHubTheme
 import br.com.devhub.ui.model.Usuario
+import br.com.devhub.ui.webclient.services.RetrofitInit
 import coil.compose.AsyncImage
+import kotlinx.coroutines.launch
 
 class PerfilDevActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        lifecycleScope.launch {
+            RetrofitInit().gitHubService.findProfileBy("Jean-Carlo-Torres").let {
+                Log.i("PerfilUsuarioActicity", "onCreate: $it")
+            }
+        }
         setContent {
             DevHubTheme {
                 // A surface container using the 'background' color from the theme
@@ -68,10 +76,11 @@ fun exibePerfilDev(usuario: Usuario) {
                     .fillMaxWidth()
                     .background(
                         brush = Brush.verticalGradient(
-                            colors = listOf( Color.Black, Color.Blue),
+                            colors = listOf(Color.Black, Color.Blue),
                             startY = 0f,
                             endY = 700f
-                        ))
+                        )
+                    )
             )
             Column(
                 modifier = Modifier
@@ -95,12 +104,12 @@ fun exibePerfilDev(usuario: Usuario) {
                     placeholder = painterResource(id = R.drawable.placeholder)
                 )
                 Text(
-                    text = usuario.nome,
+                    text = usuario.name,
                     style = MaterialTheme.typography.titleLarge,
                     modifier = Modifier.padding(vertical = 8.dp)
                 )
                 Text(
-                    text = usuario.usuarioGithub,
+                    text = usuario.login,
                     style = MaterialTheme.typography.titleMedium,
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
@@ -122,7 +131,7 @@ fun exibePerfilDevPreview() {
 }
 
 fun usuario() = Usuario(
-    nome = "Jean Carlo",
-    usuarioGithub = "Jean-Carlo-Torres",
+    name = "Jean Carlo",
+    login = "Jean-Carlo-Torres",
     bio = "biografia"
 )
