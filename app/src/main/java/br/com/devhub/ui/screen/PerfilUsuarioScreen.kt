@@ -27,12 +27,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import br.com.devhub.R
-import br.com.devhub.ui.model.Usuario
 import br.com.devhub.ui.webclient.GitHubWebClient
 import coil.compose.AsyncImage
 
 @Composable
-fun exibeTelaDePerfil(
+fun PerfilUsuarioScreen(
     usuario: String,
     webClient: GitHubWebClient = GitHubWebClient()
 ) {
