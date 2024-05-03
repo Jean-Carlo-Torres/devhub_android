@@ -16,7 +16,7 @@ import br.com.devhub.ui.activity.ui.theme.DevHubTheme
 import br.com.devhub.ui.screen.BuscaUsuarioScreen
 import br.com.devhub.ui.screen.PerfilUsuarioScreen
 
-class PerfilDevActivity : ComponentActivity() {
+class PerfilUsuarioActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

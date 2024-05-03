@@ -72,7 +72,6 @@ fun BuscaUsuarioScreen(onUsuarioBuscado: (String) -> Unit) {
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 private fun BuscaUsuarioScreenPreview() {
